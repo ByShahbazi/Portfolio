@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: "/Portfolio/",   // برای GitHub Pages ضروری است
+    base: "/Portfolio/", 
 
     server: {
       port: 3000,
