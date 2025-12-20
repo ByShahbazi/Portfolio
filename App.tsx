@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import { API_BASE_URL, FALLBACK_CONTENT } from './constants';
 import { Content } from './types';
 import { Loader2 } from 'lucide-react';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   const [data, setData] = useState<Content | null>(null);
@@ -20,7 +21,7 @@ function App() {
         // Attempt to fetch from API with a 2-second timeout to ensure quick fallback
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 2000);
-        
+
         const response = await fetch(API_BASE_URL, { signal: controller.signal });
         clearTimeout(timeoutId);
 
@@ -37,6 +38,11 @@ function App() {
       } finally {
         setLoading(false);
       }
+      return (
+        <Router basename="/Portfolio">
+          {/* Routes */}
+        </Router>
+      );
     };
 
     fetchData();
@@ -68,7 +74,7 @@ function App() {
       <main>
         {/* Optional: Indicator for demo mode if backend is down */}
         {usingFallback && (
-           <div className="hidden">System Note: Running in Offline Mode</div>
+          <div className="hidden">System Note: Running in Offline Mode</div>
         )}
         <Hero data={data} />
         <Skills data={data} />
