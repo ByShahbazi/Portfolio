@@ -1,7 +1,30 @@
 
-export const API_BASE_URL = "http://localhost:3001/api/portfolio";
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const PORT = 3001;
 
-export const FALLBACK_CONTENT = {
+// Enable CORS to allow requests from the frontend
+app.use(cors());
+app.use(express.json());
+
+// --- Database / Data Store ---
+const skills = [
+  { name: "Python", iconClass: "devicon-python-plain", color: "#3776AB" },
+  { name: "JavaScript", iconClass: "devicon-javascript-plain", color: "#F7DF1E" },
+  { name: "Playwright", iconClass: "devicon-playwright-plain", color: "#2EAD33" }, 
+  { name: "Cypress", iconClass: "devicon-cypressio-plain", color: "#17202C" },
+  { name: "Selenium", iconClass: "devicon-selenium-original", color: "#43B02A" },
+  { name: "Cucumber", iconClass: "devicon-cucumber-plain", color: "#23D96C" },
+  { name: "K6", iconClass: "devicon-k6-original", color: "#7D64FF" }, 
+  { name: "SQL", iconClass: "devicon-mysql-plain", color: "#4479A1" },
+  { name: "Oracle", iconClass: "devicon-oracle-original", color: "#F80000" },
+  { name: "Git", iconClass: "devicon-git-plain", color: "#F05032" },
+  { name: "JIRA", iconClass: "devicon-jira-plain", color: "#0052CC" },
+  { name: "Postman", iconClass: "devicon-postman-plain", color: "#FF6C37" },
+];
+
+const content = {
   personalInfo: {
     name: "Mohammad Mahdi Shahbazi",
     title: "QA Automation Engineer",
@@ -22,21 +45,8 @@ export const FALLBACK_CONTENT = {
     contactSubtitle: "I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
     rights: "All Rights Reserved."
   },
+  skills: skills, // Included directly in content
   skillsTitle: "Tech Stack",
-  skills: [
-    { name: "Python", iconClass: "devicon-python-plain", color: "#3776AB" },
-    { name: "JavaScript", iconClass: "devicon-javascript-plain", color: "#F7DF1E" },
-    { name: "Playwright", iconClass: "devicon-playwright-plain", color: "#2EAD33" }, 
-    { name: "Cypress", iconClass: "devicon-cypressio-plain", color: "#17202C" },
-    { name: "Selenium", iconClass: "devicon-selenium-original", color: "#43B02A" },
-    { name: "Cucumber", iconClass: "devicon-cucumber-plain", color: "#23D96C" },
-    { name: "K6", iconClass: "devicon-k6-original", color: "#7D64FF" }, 
-    { name: "SQL", iconClass: "devicon-mysql-plain", color: "#4479A1" },
-    { name: "Oracle", iconClass: "devicon-oracle-original", color: "#F80000" },
-    { name: "Git", iconClass: "devicon-git-plain", color: "#F05032" },
-    { name: "JIRA", iconClass: "devicon-jira-plain", color: "#0052CC" },
-    { name: "Postman", iconClass: "devicon-postman-plain", color: "#FF6C37" },
-  ],
   experienceTitle: "Experience & Education",
   workTitle: "Work Experience",
   educationTitle: "Education",
@@ -90,3 +100,16 @@ export const FALLBACK_CONTENT = {
       description: ""
   }
 };
+
+// --- API Endpoints ---
+
+app.get('/api/portfolio', (req, res) => {
+  // Simulating a slight network delay for effect
+  setTimeout(() => {
+    res.json(content);
+  }, 800);
+});
+
+app.listen(PORT, () => {
+  console.log(`Backend API Server running at http://localhost:${PORT}`);
+});

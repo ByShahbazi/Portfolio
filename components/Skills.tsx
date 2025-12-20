@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { skills } from '../constants';
 import { motion } from 'framer-motion';
 import { Content } from '../types';
 
@@ -25,7 +25,7 @@ const Skills: React.FC<SkillsProps> = ({ data }) => {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {skills.map((skill, index) => (
+          {data.skills.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, scale: 0.9 }}

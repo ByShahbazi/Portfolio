@@ -1,3 +1,4 @@
+
 export interface Experience {
   id: number;
   role: string;
@@ -42,6 +43,7 @@ export interface Content {
   experiences: Experience[];
   education: Education;
   highSchool: Education;
+  skills: Skill[]; // Added skills to the main content structure
   skillsTitle: string;
   experienceTitle: string;
   workTitle: string;
